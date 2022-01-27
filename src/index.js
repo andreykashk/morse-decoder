@@ -38,9 +38,23 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
+    const currArr = expr.match(/.{1,10}/g);
+    const re = /00/g;
+    const re10 = /10/g;
+    const re11 = /11/g;
+    const res = currArr.map((item) => {
+        if (item === '**********') {
+            return ' '
+        } else {
+            return MORSE_TABLE[(item.replace(re, '').replace(re10, '.').replace(re11, '-'))]
+        }
+    })
+
+    return res.join('');
 }
 
 module.exports = {
     decode
 }
+
+// console.log(decode("00101010100000000010001011101000101110100000111111**********00001011110000111111000010111000101110100000111010"))
